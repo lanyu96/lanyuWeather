@@ -1,0 +1,14 @@
+
+    <!--将数据库名指定成 cool_weather,数据库版本指定成1,-->
+        <!--并将Province,City和County这三个实体类添加到映射列表中-->
+<litepal>
+    <dbname value="cool_weather" />
+    <version value="1" />
+    <list>
+        <mapping class="com.lanyuweather.zhou.db.Province" />
+        <mapping class="com.lanyuweather.zhou.db.City"/>
+        <mapping class="com.lanyuweather.zhou.db.County"/>
+
+    </list>
+
+</litepal>
