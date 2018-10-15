@@ -91,8 +91,8 @@ public class Choose_AreaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_area, container, false);
         titleText = view.findViewById(R.id.title_text);
-        backButton =  view.findViewById(R.id.back_button);
-        listView =  view.findViewById(R.id.list_view);
+        backButton = view.findViewById(R.id.back_button);
+        listView = view.findViewById(R.id.list_view);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
         return view;
@@ -110,9 +110,8 @@ public class Choose_AreaFragment extends Fragment {
                 } else if (currentLevel == LEVEL_CITY) {
                     selectedCity = cityList.get(position);
                     queryCounties();
-                }
-//                else if (currentLevel == LEVEL_COUNTY) {
-//                    String weatherId = countyList.get(position).getWeatherId();
+                } else if (currentLevel == LEVEL_COUNTY) {
+                    String weatherId = countyList.get(position).getWeatherId();
 //                    if (getActivity() instanceof MainActivity) {
 //                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
 //                        intent.putExtra("weather_id", weatherId);
@@ -124,7 +123,12 @@ public class Choose_AreaFragment extends Fragment {
 //                        activity.swipeRefresh.setRefreshing(true);
 //                        activity.requestWeather(weatherId);
 //                    }
-//                }
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id", weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
+
+                }
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +230,7 @@ public class Choose_AreaFragment extends Fragment {
 //                    result = Utility.handleCityResponse(responseText, selectedProvince.getId());
                     result = Utility.handleCityResponse(responseText, selectedProvince.getId());
                 } else if ("county".equals(type)) {
-                    result = Utility.handleCountResponse(responseText,selectedCity.getId());
+                    result = Utility.handleCountResponse(responseText, selectedCity.getId());
 
                 }
                 if (result) {
