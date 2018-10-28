@@ -8,7 +8,6 @@ package com.lanyuweather.zhou;
 //import android.widget.LinearLayout;
 //import android.widget.ScrollView;
 //import android.widget.TextView;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -28,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.ImageVideoBitmapDecoder;
 import com.lanyuweather.zhou.gson.Forecast;
 import com.lanyuweather.zhou.gson.Weather;
 import com.lanyuweather.zhou.util.HttpUtil;
@@ -60,10 +58,9 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
-
-
         //初始化控件
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
         titleCity = (TextView) findViewById(R.id.title_city);
@@ -94,6 +91,7 @@ public class WeatherActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         final String weatherId;
+
         if (weatherString != null) {
             // 有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
@@ -116,12 +114,7 @@ public class WeatherActivity extends AppCompatActivity {
                 requestWeather(weatherId);
             }
         });
-//        navButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                drawerLayout.openDrawer(GravityCompat.START);
-//            }
-//        });
+
         String bingPic = prefs.getString("bing_pic", null);
         if (bingPic != null) {
             Glide.with(this).load(bingPic).into(bingPicImg);
